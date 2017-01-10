@@ -1,118 +1,134 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@page import="com.devops.pojo.getList"%>
+<%@page import="com.devops.db.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="com.devops.db.*"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
+<link rel="stylesheet" type="text/css" href="bootstrap/Css.css">
+ <link rel="stylesheet" type="text/css" href="bootstrap/Css.css"> 
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="bootstrap/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+      
+<%
+	String check = (String) session.getAttribute("skey");
+	Integer uid= (Integer) session.getAttribute("ssuid");
+	String username = "";
+	String userposition = "";
+	getList a=new getList();
+	if (check != null) {
+		request.setAttribute("tt", a.getDSUser(uid));
+		username = (String) session.getAttribute("ssuser");
+		userposition = (String) session.getAttribute("ssup");
+
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Calendar</title>
-<!-- bootstrap -->
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    
-	<link rel="stylesheet" type="text/css" href="bootstrap/Css.css">
-	<script type="text/javascript" src="bootstrap/js.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Đổi Mật Khẩu</title>
+<link href="css/layout_style.css" rel="stylesheet" type="text/css">
+<link href="css/setting_style.css" rel="stylesheet">
+
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
-	<div id="main">
-		<div id="main-container">
-			<div class="col-md-12" style="background-color:#2F4F4F">
-				<div class="col-md-6" style="height:60px">
-				<button id="button-TAO" type="button" class="btn btn-danger" 
-					onclick="location.href='taosukien.jsp'">TẠO</a></button>
-				</div>
-				<div class="col-md-3 col-md-offset-3">
-					<form style="">
-						<img src="img/main-user.png" >
-						<div class="btn-group">
-						  <button type="button" class="btn btn-success">Đức Việt</button>
-						  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-						    <span class="caret"></span>
-						    <span class="sr-only">Toggle Dropdown</span>
-						  </button>
-						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="tttaikhoang.jsp">Thông Tin Tài Khoản</a></li>
-						    <li><a href="doimk.jsp">Đổi Mật Khẩu</a></li>
-						    <li class="divider"></li>
-						    <li><a href="dangnhap.jsp">Đăng Xuất</a></li>
-						  </ul>
-						</div>
-					</form>
-				</div>
+<jsp:include page="header.jsp"></jsp:include>
+	<br></br>
+	<div id="wrapper">
+		<div id="header">
+			<div id="logo">
+					<img src="images/background/logo.png" width="250" height="80"
+						alt="logo">
+	
 			</div>
-			<div id="main-menu">
+			<div id="nav_container">
+				<div id="tag">
+						<font size="2" color="black">Xin Chào</font><font size="2" color="blue">
+						<%=username%></font><font size="2" color="black"> !</font>
+				</div>
+				<div id="nav_bar">
+					<nav class="group">
+						<%
+							if (userposition.equals("A")) {
+						%>
+						<%@include file="inc/inc_admin_navigation.jsp"%>
+						<%
+							} else {
+						%>
+						<%@include file="inc/inc_user_navigation.jsp"%>
+						<%
+							}
+						%>
+					</nav>
+				</div>		
+			</div>
+				
+			</div>	
+		<div id="main-menu">
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
-			            <div class="input-group" id="adv-search">
-			                <input type="text" class="form-control" placeholder="Tên Sự Kiện" />
-			                <div class="input-group-btn">
-			                    <div class="btn-group" role="group">
-			                        <div class="dropdown dropdown-lg">
-			                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="flase"><span class="caret"></span></button>
-			                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-			                                <form class="form-horizontal" role="form">
-				                                  <div class="form-group">
-				                                    <label for="filter">Tên Sự Kiện</label>
-				                                    <input class="form-control" type="text" placeholder="Tên Sự Kiện"/>
-				                                  </div>
-				                                  <div class="form-group">
-				                                    <label for="contain">Từ</label>
-				                                    <input class="form-control" type="date"/>
-				                                  </div>
-				                                  <div class="form-group">
-				                                    <label for="contain">Đến</label>
-				                                    <input class="form-control" type="date"/>
-				                                  </div>
-				                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-			                                </form>
-			                            </div>
-			                        </div>
-			                        <a type="button" class="btn btn-primary" href="timkiem.jsp"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-			                    </div>
-			                </div>
-			            </div>
+			         <div id="main-form">
+				<h1>Đổi Mật Khẩu</h1>
+				<div id="form-dangki">
+					<form action="ChangePass" method="post" role="form"
+								 id="register-form" class="form-horizontal" name="form" >
+								<input type="hidden" name="uid" value="<%=uid%>">
+						<div class="form-group">
+						    <label for="oldpassword" class="col-xs-4 control-label">Mật khẩu Cũ</label>
+							<div class="col-xs-5">
+							    <input  onchange="checkPass();" class="form-control" id="password" name="password"  type="password"
+												placeholder="Mật khẩu cũ" required="required" >
+							</div>
+						</div>
+
+						<div class="form-group">
+						    <label for="password" class="col-xs-4 control-label">Mật khẩu Mới</label>
+							<div class="col-xs-5">
+							    <input class="form-control" name="newpassword" type="password" 
+							    placeholder="Mật khẩu" required="required">
+							</div>
+						</div>
+
+						<div class="form-group">
+						    <label for="repassword" class="col-xs-4 control-label">Xác Nhận Mật Khẩu Mới</label>
+							<div class="col-xs-5">
+							    <input  class="form-control" name="repassword" type="password" 
+							    placeholder="Xác nhận mật khẩu" required="required"   onkeyup="checkPass(); return false;">
+							</div>
+							
+						</div>
+						<div  class="row">
+					<div align="center">
+							<input type="submit" name="submit" value="Đồng Ý">
+					</div>
+				</div>
+					</form>
+				</div>
+				
+			</div>   
 			        </div>
 			    </div>
 			</div>
-			<div id="main-form">
-				<h1>Đổi Mật Khẩu</h1>
-				<div id="form-dangki">
-					<form id="register-form" class="form-horizontal" name="form">
-						<div class="form-group">
-						    <label for="oldpassword" class="col-xs-3 control-label">Mật khẩu Cũ</label>
-							<div class="col-xs-4">
-							    <input class="form-control" name="oldpassword" type="password" 
-							    placeholder="Mật khẩu" required>
-							</div>
-						</div>
-
-						<div class="form-group">
-						    <label for="password" class="col-xs-3 control-label">Mật khẩu Mới</label>
-							<div class="col-xs-4">
-							    <input class="form-control" name="password" type="password" 
-							    placeholder="Mật khẩu" required>
-							</div>
-						</div>
-
-						<div class="form-group">
-						    <label for="repassword" class="col-xs-3 control-label">Xác Nhận Mật Khẩu Mới</label>
-							<div class="col-xs-4">
-							    <input class="form-control" name="repassword" type="password" 
-							    placeholder="Xác nhận mật khẩu" required>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div  class="row">
-					<div class="col-md-6 col-md-offset-3">
-							<a href="doimktc.jsp"><button type="submit" class="btn btn-primary">Đồng Ý</button>
-							<a href="Calendar.jsp"><button type="button" class="btn btn-primary">Trở Lại</button></a>
-					</div>
-				</div>
-			</div>
-		</div>
+			
+		<br /></br>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
+	
+	<script src="jquery/jquery-2.1.4.min.js"></script>
+	<script src="js/layout.js"></script>
+<script type="text/javascript">
+</script>
 </body>
 </html>

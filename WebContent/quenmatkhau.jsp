@@ -23,10 +23,9 @@
 		<div id="main-container">
 			<div id="main-menu" style="	background-color:#2F4F4F;">
 				<ul class="nav nav-tabs" role="tablist">
-				  <li><a href="dangnhap.jsp">Đăng Nhập</a></li>
-				  <li><a href="dangky.jsp">Đăng Kí</a></li>
+				  <li><a href="index.jsp">Đăng Nhập</a></li>
+				  <li><a href="registration.jsp">Đăng Kí</a></li>
 				  <li class="active"><a href="quenmatkhau.jsp">Quên Mật Khẩu</a></li>
-				  <li><a href="lienhe.jsp">Liên Hệ</a></li>      
 				</ul>
 			</div>
 			<div id="main-form">
@@ -35,7 +34,7 @@
 					<div class="col-md-8 col-md-offset-2">
 	                   	<form id="registerform" method="post" class="form-horizontal">
 		                   	<div class="form-group">
-		                        <label class="col-md-3 control-label">Quên Mật Khẩu</label>
+		                        <label class="col-md-3 control-label">Tên Đăng Nhập</label>
 		                        <div class="col-md-5">
 		                            <input type="text" class="form-control" name="accountname" />
 		                            <span class="help-block" style="font-style: italic; font-size: 12px">Vui lòng nhập tài khoản đã đăng kí sử dụng dịch vụ</span>
@@ -51,7 +50,7 @@
 	                            </div>
 
 		                        <div class="col-md-9 col-md-offset-3">
-		                            <a type="button" class="btn btn-primary" href="xacnhanemail.jsp">Đồng Ý</a>
+		                            <a  type="submit" class="btn btn-primary" href="xacnhanemail.jsp">Đồng Ý</a>
 		                    </div>
 	                    </form>
 					</div>

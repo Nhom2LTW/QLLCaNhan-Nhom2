@@ -22,7 +22,7 @@
 			<div id="main-form">
 				<h1>Đổi Mật Khẩu Thành Công!</h1>
 					<div style=" text-align:center; height: 480px; margin-top: 60px; font-size: 26px;">
-						Nhấn <a href="dangnhap.jsp"><i>vào đây</i></a> để đăng nhập lại!
+						Nhấn <a href="index.jsp"><i>vào đây</i></a> để đăng nhập lại!
 					</div>
 			</div>
 		</div>

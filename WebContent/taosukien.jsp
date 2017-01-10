@@ -39,7 +39,7 @@
 							    <li><a href="tttaikhoang.jsp">Thông Tin Tài Khoản</a></li>
 							    <li><a href="doimk.jsp">Đổi Mật Khẩu</a></li>
 							    <li class="divider"></li>
-							    <li><a href="dangnhap.jsp">Đăng Xuất</a></li>
+							  <li><a href="logout.jsp">Đăng Xuất</a></li>
 							  </ul>
 							</div>
 						</form>

@@ -1,5 +1,4 @@
 body{
-	background: url(../img/body-brackground.jpeg);
 }
 .btn{
 	height:34px;
@@ -8,20 +7,13 @@ body{
 		max-width: 900px;
 		margin: 0 auto;
 }
-.show-grid {
-	background-color: #eee;
-	border: 1px solid #ddd;
-	background-color: rgba(86,61,124,.15);
-	border: 1px solid rgba(86,61,124,.2);
-}
 #main{
-	background: url(../img/main-brackground.jpg);
 	position: relative;
 	top: 10px;
-	max-width: 1024px;
+	width: 1024px;
 	margin: auto;
 	border: 1px solid #ccc;
-	box-shadow:5px 5px 5px white;
+	box-shadow: 10px 10px 5px #c0c0c0;
 }
 #main-header{
 	max-width: 100%;

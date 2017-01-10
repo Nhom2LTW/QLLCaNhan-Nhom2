@@ -50,16 +50,23 @@ $(document).ready(function() {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			username: {
+			firstname: {
+				message: 'Họ người dùng không hợp lệ',
+				validators: {
+					notEmpty: {
+						message: 'Họ người dùng không thể để trống'
+					},
+					regexp: {
+						regexp: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/,
+						message: 'Họ người dùng không hợp lệ'
+					}
+				}
+			},
+			lastname: {
 				message: 'Tên người dùng không hợp lệ',
 				validators: {
 					notEmpty: {
 						message: 'Tên người dùng không thể để trống'
-					},
-					stringLength: {
-						min: 6,
-						max: 20,
-						message: 'Tên người dùng dài tối thiểu 6 kí tự và tối đa 20 kí tự'
 					},
 					regexp: {
 						regexp: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/,
@@ -67,20 +74,16 @@ $(document).ready(function() {
 					}
 				}
 			},
-			accountname: {
+			username: {
 				message: 'Tên đăng nhập không hợp lệ',
 				validators: {
 					notEmpty: {
 						message: 'Tên đăng nhập không thể để trống'
 					},
 					stringLength: {
-						min: 6,
+						min: 3,
 						max: 20,
-						message: 'Tên đăng nhập dài tối thiểu 6 kí tự và tối đa 20 kí tự'
-					},
-					regexp: {
-						regexp: /^[a-zA-Z0-9_]+$/,
-						message: 'Tên tài khoản chỉ gồm các kí tự a-z và 0-9'
+						message: 'Tên đăng nhập dài tối thiểu 3 kí tự và tối đa 20 kí tự'
 					}
 				}
 			},
@@ -91,7 +94,7 @@ $(document).ready(function() {
 					}
 				}
 			},
-			confirmPassword: {
+			cpassword: {
 				validators: {
 					notEmpty: {
 						message: 'Xác nhận mật khẩu không thể để trống'
@@ -124,7 +127,7 @@ $(document).ready(function() {
 						message: 'Số điện thoại không hợp lệ'
 					},
 					regexp: {
-						regexp: /^[0-9]+$/,
+						regexp: /^[0-9+]+$/,
 						message: 'Số điện thoại chỉ gồm các kí tự 0-9'
 					}
 				}
